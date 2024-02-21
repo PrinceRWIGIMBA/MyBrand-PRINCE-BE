@@ -12,7 +12,8 @@ const {
 import { requireSignIn, allowedTo } from "../middlwares/authMiddlewares";
 
 //create comment
-router.post("/", requireSignIn, allowedTo("user", "admin"), createComment);
+router.post('/:blogId',requireSignIn, allowedTo("user", "admin"), createComment);
+
 
 //update comment
 router.put(

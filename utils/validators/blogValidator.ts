@@ -29,6 +29,14 @@ const createBlogValidator: ValidatorMiddleware = async (req: RequestWithValidati
       .messages({
         'string.empty': 'description is not allowed to be empty',
         'string.max': 'description length must be less than or equal to {#limit} characters long',
+      }),
+      contents: Joi.string()
+      .required()
+      .empty()
+      .max(1500)
+      .messages({
+        'string.empty': 'content is not allowed to be empty',
+        'string.max': 'content length must be less than or equal to {#limit} characters long',
       })
   });
 
@@ -67,6 +75,15 @@ const updateBlogValidator: ValidatorMiddleware = async (req: RequestWithValidati
       .messages({
         'string.min': 'description length must be at least {#limit} characters long',
         'string.max': 'description length must be less than or equal to {#limit} characters long',
+      }),
+      contents: Joi.string()
+      .optional()
+      .empty()
+      .min(2)
+      .max(600)
+      .messages({
+        'string.min': 'content length must be at least {#limit} characters long',
+        'string.max': 'content length must be less than or equal to {#limit} characters long',
       }),
   });
 

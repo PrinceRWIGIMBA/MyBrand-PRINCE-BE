@@ -6,26 +6,25 @@ const {createMessage,updateMessage,allMessages,getMessage,deleteMessage,} = requ
 import { requireSignIn, allowedTo} from "../middlwares/authMiddlewares";
 
 const {
-  createBlogValidator,
-  updateBlogValidator,
-} = require("../utils/validators/blogValidator");
+  messageValidator,
+ 
+} = require("../utils/validators/messageValidator");
 
-// Create Blog
-router.post("/", createBlogValidator, createMessage);
 
-// Update Blog
+router.post("/", messageValidator, createMessage);
+
 
 router.put(
   "/:id",
   requireSignIn,
   allowedTo("admin"),
-  updateBlogValidator,
+  messageValidator,
   updateMessage
 );
 
-// get all Blog
 
-router.get("/", requireSignIn,  requireSignIn,
+
+router.get("/",  requireSignIn,
 allowedTo("admin"),allMessages);
 
 // get a single Blog

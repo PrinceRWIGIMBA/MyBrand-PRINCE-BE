@@ -19,17 +19,6 @@ const messageSchema = Joi.object({
     .email()
     .max(40)
     .required()
-    .custom(async (value, helpers) => {
-      try {
-        const user = await User.findOne({ email: value });
-        if (user) {
-          return helpers.error("any.custom", { message: "User already exists" });
-        }
-        return value;
-      } catch (error: any) {
-        throw new Error(error);
-      }
-    })
     .messages({
       "string.empty": "email is not allowed to be empty",
       "string.email": "Email must be a valid email",

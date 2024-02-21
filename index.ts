@@ -1,4 +1,4 @@
-import express, { Application, Request, Response, NextFunction } from "express";
+import express, {Application, Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import "./config/database";
 
@@ -12,11 +12,14 @@ app.use(express.json());
 import authRouter from "./routes/auth.route";
 import blogRouter from "./routes/blog.route";
 import commentRouter from "./routes/comment.route";
+import messageRouter from "./routes/message.route"
 
 // Routes Middleware
 app.use("/api/auth", authRouter);
 app.use("/api/blogs", blogRouter);
 app.use("/api/comments", commentRouter);
+app.use("/api/messages", messageRouter);
+
 
 // 404 error
 app.all("*", (req: Request, res: Response, next: NextFunction) => {

@@ -4,6 +4,7 @@ import User from '../model/User';
 
 interface AuthenticatedRequest extends Request {
   user?: { _id: string; role: string }; 
+  blog?: { _id: string };
 }
 
 export const requireSignIn = async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {

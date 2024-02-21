@@ -2,7 +2,7 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface IComment extends Document {
   user: object;
-  blog: mongoose.Types.ObjectId;
+  blog: object;
   description: string;
 }
 
@@ -14,7 +14,6 @@ const commentSchema: Schema = new Schema(
     },
     blog: {
       type: Schema.Types.ObjectId,
-      ref: "Blog",
       required: [true, "Blog is required"],
     },
     description: {

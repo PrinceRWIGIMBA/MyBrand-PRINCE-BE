@@ -3,11 +3,13 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 interface IBlog extends Document {
   title: string;
   description: string;
+  contents: string;
   image?: string;
   author: mongoose.Types.ObjectId;
   likes: mongoose.Types.ObjectId[];
   disLikes: mongoose.Types.ObjectId[];
   comments: mongoose.Types.ObjectId[];
+  cloudinary_id:string;
 }
 
 const BlogSchema: Schema = new Schema(
@@ -18,6 +20,11 @@ const BlogSchema: Schema = new Schema(
       trim: true,
     },
     description: {
+      type: String,
+      required: [true, "blog description is required"],
+      trim: true,
+    },
+    contents: {
       type: String,
       required: [true, "blog description is required"],
       trim: true,
@@ -46,6 +53,12 @@ const BlogSchema: Schema = new Schema(
       {
         type: Schema.Types.ObjectId,
         ref: "Comment",
+      },
+    ],
+    cloudinary_id: [
+      {
+        type: String,
+       
       },
     ],
   },

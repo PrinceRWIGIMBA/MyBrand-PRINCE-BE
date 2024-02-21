@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import Message from '../model/Message';
 
-// Create a Message
+
 export const createMessage = async (req: Request, res: Response) => {
   try {
     const message = await Message.create(req.body);
@@ -11,7 +11,7 @@ export const createMessage = async (req: Request, res: Response) => {
   }
 };
 
-// Update a Message
+
 export const updateMessage = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
@@ -27,7 +27,7 @@ export const updateMessage = async (req: Request, res: Response, next: NextFunct
   }
 };
 
-// Get List of Message
+
 export const allMessages = async (req: Request, res: Response) => {
   try {
     const messages = await Message.find();
@@ -37,7 +37,7 @@ export const allMessages = async (req: Request, res: Response) => {
   }
 };
 
-// Get a single Message
+
 export const getMessage = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const message = await Message.findById(req.params.id);
@@ -51,7 +51,7 @@ export const getMessage = async (req: Request, res: Response, next: NextFunction
   }
 };
 
-// Delete Message
+
 export const deleteMessage = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;

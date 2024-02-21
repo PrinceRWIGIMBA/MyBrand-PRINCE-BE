@@ -9,24 +9,34 @@ interface AuthenticatedRequest extends Request {
 }
 
 
-// Create Comment
+
+
 export const createComment = async (req: AuthenticatedRequest, res: Response) => {
   try {
     let userId = req.user?._id;
-    const comment = await Comment.create({ user: userId, ...req.body });
+    
+    // Extract blogId from URL params
+    const { blogId } = req.params;
 
-    // Add comment to blog
+    // Check if blogId is provided
+    if (!blogId) {
+      return res.status(400).json({ error: 'Blog ID is required' });
+    }
+
+    const comment = await Comment.create({ user: userId, blog: blogId, ...req.body });
+
+    // Update the blog with the new comment
     await Blog.findByIdAndUpdate(
-      req.body.blog,
+      blogId,
       {
         $addToSet: { comments: comment._id },
       },
       { new: true }
     );
 
-    // Add comment to user
+    // Update the user with the new comment
     await User.findByIdAndUpdate(
-      req.user._id,
+      userId,
       {
         $addToSet: { comments: comment._id },
       },
@@ -39,7 +49,6 @@ export const createComment = async (req: AuthenticatedRequest, res: Response) =>
   }
 };
 
-// Update Comment
 export const updateComment = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -55,7 +64,6 @@ export const updateComment = async (req: Request, res: Response) => {
   }
 };
 
-// Get a Single Comment
 export const getComment = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -71,7 +79,6 @@ export const getComment = async (req: Request, res: Response) => {
   }
 };
 
-// Get All Comments
 export const allComments = async (req: Request, res: Response) => {
   try {
     const comments = await Comment.find();
@@ -81,7 +88,6 @@ export const allComments = async (req: Request, res: Response) => {
   }
 };
 
-// Delete Comment
 export const deleteComment = async (req: AuthenticatedRequest, res: Response) => {
   try {
     const { id } = req.params;
@@ -91,7 +97,7 @@ export const deleteComment = async (req: AuthenticatedRequest, res: Response) =>
       return res.status(404).json({ error: `No comment found for id ${id}` });
     }
 
-    // Remove comment from associated blog
+    // Remove the comment ID from the blog's comments array
     await Blog.findByIdAndUpdate(
       req.blog._id,
       {
@@ -99,10 +105,11 @@ export const deleteComment = async (req: AuthenticatedRequest, res: Response) =>
       },
       { new: true }
     );
+    console.log(req.blog._id);
 
-    // Remove comment from associated user
+    // Remove the comment ID from the user's comments array
     await User.findByIdAndUpdate(
-      req.user._id,
+      req.user?._id,
       {
         $pull: { comments: deletedComment._id },
       },
