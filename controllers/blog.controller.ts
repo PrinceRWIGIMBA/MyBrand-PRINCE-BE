@@ -109,7 +109,7 @@ export const updateBlog = async (req: AuthenticatedRequest, res: Response) => {
   }
 };
 
-// Function to fetch all blogs
+
 export const allBlogs = async (req: Request, res: Response) => {
   try {
     const blogs = await Blog.find().populate('author');
@@ -119,7 +119,6 @@ export const allBlogs = async (req: Request, res: Response) => {
   }
 };
 
-// Function to fetch a single blog by ID
 export const getBlog = async (req: Request, res: Response) => {
   try {
     const blog = await Blog.findById(req.params.id).populate('author');
@@ -133,7 +132,7 @@ export const getBlog = async (req: Request, res: Response) => {
   }
 };
 
-// Function to delete a blog
+
 export const deleteBlog = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -143,10 +142,10 @@ export const deleteBlog = async (req: Request, res: Response) => {
       return res.status(404).send({ error: `No Blog for this id ${id}` });
     }
 
-    // Delete image from Cloudinary
+   
     await cloudinary.uploader.destroy(blog.cloudinary_id);
 
-    // Delete blog entry from the database
+  
     await blog.remove();
 
     res.status(200).json({ message: "Delete successful" });
@@ -156,7 +155,6 @@ export const deleteBlog = async (req: Request, res: Response) => {
 };
 
 
-// Function to like a blog
 
 
 
@@ -169,17 +167,17 @@ export const likeBlog = async (req: AuthenticatedRequest, res: Response) => {
       return res.status(404).json({ error: `No Blog found for id ${id}` });
     }
 
-    // Check if the user has already liked the blog
+   
     if (blog.likes.includes(req.user._id)) {
       return res.status(400).json({ error: "You have already liked this blog" });
     }
 
-    // Check if the user has disliked the blog, and if so, remove the dislike
+    
     if (blog.disLikes.includes(req.user._id)) {
       blog.disLikes = blog.disLikes.filter((userId) => userId.toString() !== req.user._id.toString());
     }
 
-    // Add user's ID to the likes array
+
     blog.likes.push(req.user._id);
     await blog.save();
 
@@ -190,7 +188,7 @@ export const likeBlog = async (req: AuthenticatedRequest, res: Response) => {
 };
 
 
-// Function to dislike a blog
+
 
 
 export const dislikeBlog = async (req: AuthenticatedRequest, res: Response) => {
@@ -202,17 +200,16 @@ export const dislikeBlog = async (req: AuthenticatedRequest, res: Response) => {
       return res.status(404).json({ error: `No Blog found for id ${id}` });
     }
 
-    // Check if the user has already disliked the blog
     if (blog.disLikes.includes(req.user._id)) {
       return res.status(400).json({ error: "You have already disliked this blog" });
     }
 
-    // Check if the user has liked the blog, and if so, remove the like
+    
     if (blog.likes.includes(req.user._id)) {
       blog.likes = blog.likes.filter((userId) => userId.toString() !== req.user._id.toString());
     }
 
-    // Add user's ID to the disLikes array
+   
     blog.disLikes.push(req.user._id);
     await blog.save();
 

@@ -27,13 +27,12 @@ router.put(
 router.get("/",  requireSignIn,
 allowedTo("admin"),allMessages);
 
-// get a single Blog
 
 router.get(
   "/:id", requireSignIn,
   allowedTo("admin"), getMessage);
 
-// Delete a Blog
+
 router.delete(
   "/:id",
   requireSignIn,

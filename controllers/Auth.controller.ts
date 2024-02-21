@@ -8,7 +8,7 @@ export const signup = async (req: Request, res: Response) => {
   const { firstname, lastname, email, password } = req.body;
 
   try {
-    // Check if there is any user with the role of "admin" in the database
+    
     const adminExists = await User.exists({ role: 'admin' });
 
     let userRole = 'user';

@@ -1,6 +1,6 @@
 import express from "express";
 import { singleUpload } from "../config/multer";
-// blogRoutes.ts
+
 
 
 const router = express.Router();
@@ -14,10 +14,10 @@ const {
   updateBlogValidator,
 } = require("../utils/validators/blogValidator");
 
-// Create Blog
+
 router.post("/", requireSignIn, allowedTo("admin"), createBlogValidator, createBlog);
 
-// Update Blog
+
 
 router.put(
   "/:id",
@@ -27,16 +27,15 @@ router.put(
   updateBlog
 );
 
-// get all Blog
+
 
 router.get("/", allBlogs);
 
-// get a single Blog
 
 router.get(
   "/:id", getBlog);
 
-// Delete a Blog
+
 router.delete(
   "/:id",
   requireSignIn,
@@ -49,10 +48,10 @@ router.delete(
 
 
 
-// Like a Blog
+
 router.post('/like/:id',requireSignIn, likeBlog);
 
-// Dislike a Blog
+
 router.post('/dislike/:id',requireSignIn, dislikeBlog);
 
 
