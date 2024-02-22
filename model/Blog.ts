@@ -26,7 +26,7 @@ const BlogSchema: Schema = new Schema(
     },
     contents: {
       type: String,
-      required: [true, "blog description is required"],
+      required: [true, "blog content is required"],
       trim: true,
     },
     image: {

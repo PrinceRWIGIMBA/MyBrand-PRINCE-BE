@@ -1,29 +1,28 @@
-import multer, { FileFilterCallback } from "multer";
-import path from "path";
-import { Request } from "express";
+import multer from 'multer';
+import path from 'path';
+import { Request } from 'express';
 
-
-const multerConfig = multer({
-  storage: multer.diskStorage({}),
-  fileFilter: (
-    req: Request,
-    file: Express.Multer.File,
-    cb: FileFilterCallback
-  ) => {
-    let ext = path.extname(file.originalname);
-    if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
-      
-      cb(new Error("File type is not supported"));
-      return;
-    }
-
-    cb(null, true);
+// Multer configuration
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
   },
 });
 
-const fieldName = "image"; 
+const fileFilter = (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+  let ext = path.extname(file.originalname);
+  if (ext !== '.jpg' && ext !== '.jpeg' && ext !== '.png') {
+       cb(new Error("File type is not supported"));
+      return;
+  }
+  cb(null, true);
+};
 
+const multerConfig = multer({ storage: storage, fileFilter: fileFilter });
 
-const singleUpload = multerConfig.single(fieldName);
+const upload = multerConfig.any();
 
-export { singleUpload };
+export { upload };

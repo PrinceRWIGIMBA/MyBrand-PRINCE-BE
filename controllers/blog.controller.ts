@@ -1,53 +1,60 @@
+// blog.route.ts
 import { Request, Response } from 'express';
-import { singleUpload } from '../config/multer'; // Importing the singleUpload middleware from your multer configuration file
+import { upload } from '../config/multer';
 import cloudinary from '../config/cloudinary';
-import Blog from '../model/Blog'; // Import Blog model
-import User from '../model/User'; // Import User model
+import Blog from '../model/Blog';
+import User from '../model/User';
 import mongoose, { Types } from 'mongoose';
 
 interface AuthenticatedRequest extends Request {
-  user: { _id: Types.ObjectId };   
+  user: { _id: Types.ObjectId };
+  files: Express.Multer.File[]; // Define files as Express.Multer.File[]
 }
 
 // Function to create a new blog
 export const createBlog = async (req: AuthenticatedRequest, res: Response) => {
   try {
     // Use Multer middleware for file upload
-    singleUpload(req, res, async (err: any) => {
+    upload(req, res, async (err: any) => {
       if (err) {
         // Handle multer errors
         return res.status(400).json({ error: err.message });
       }
 
-      // Check if req.file exists
-      if (!req.file) {
-        return res.status(400).json({ error: 'Image file is required' });
+      try {
+        // Check if req.files exists
+        if (!req.files || !req.files.length) {
+          return res.status(400).json({ error: 'At least one image file is required' });
+        }
+
+        // Upload the first image to Cloudinary
+        const cloudinaryResponse = await cloudinary.uploader.upload(req.files[0].path);
+        const imageUrl = cloudinaryResponse.secure_url;
+        const cloudinary_id = cloudinaryResponse.public_id;
+
+        // Create blog entry with the first image's URL and cloudinary_id
+        const newBlogData = {
+          ...req.body,
+          author: req.user._id,
+          image: imageUrl,
+          cloudinary_id: cloudinary_id,
+          likes: [],
+          disLikes: [],
+        };
+
+        const blog = await Blog.create(newBlogData);
+
+        // Update user's blogs
+        await User.findByIdAndUpdate(
+          req.user._id,
+          { $addToSet: { blogs: blog._id } },
+          { new: true }
+        );
+
+        res.status(201).send({ data: blog });
+      } catch (error: any) {
+        res.status(500).send({ error: error.message });
       }
-
-      // Upload image to Cloudinary
-      const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path);
-      const imageUrl = cloudinaryResponse.secure_url;
-      const cloudinary_id = cloudinaryResponse.public_id;
-
-      // Create blog entry
-      const newBlogData = {
-        ...req.body,
-        author: req.user._id,
-        image: imageUrl, // Assuming you have an 'image' field in your blog model
-        cloudinary_id: cloudinary_id,
-        likes: [], 
-      disLikes: [],
-      };
-      const blog = await Blog.create(newBlogData);
-
-      // Update user's blogs
-      await User.findByIdAndUpdate(
-        req.user._id,
-        { $addToSet: { blogs: blog._id } },
-        { new: true }
-      );
-
-      res.status(201).send({ data: blog });
     });
   } catch (error: any) {
     res.status(500).send({ error: error.message });

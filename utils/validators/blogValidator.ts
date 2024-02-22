@@ -30,7 +30,7 @@ const createBlogValidator: ValidatorMiddleware = async (req: RequestWithValidati
         'string.empty': 'description is not allowed to be empty',
         'string.max': 'description length must be less than or equal to {#limit} characters long',
       }),
-      contents: Joi.string()
+    contents: Joi.string()
       .required()
       .empty()
       .max(1500)
@@ -39,13 +39,14 @@ const createBlogValidator: ValidatorMiddleware = async (req: RequestWithValidati
         'string.max': 'content length must be less than or equal to {#limit} characters long',
       })
   });
-
+console.log(req.body)
   const { error } = schema.validate(req.body, { abortEarly: false });
   if (error) {
     req.validationErrors = error.details.map((err) => err.message);
   }
   next();
 };
+
 
 const updateBlogValidator: ValidatorMiddleware = async (req: RequestWithValidation, res, next) => {
   const schema = Joi.object({

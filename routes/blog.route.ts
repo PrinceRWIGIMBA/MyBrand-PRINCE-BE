@@ -1,5 +1,5 @@
 import express from "express";
-import { singleUpload } from "../config/multer";
+import { upload } from "../config/multer";
 
 
 

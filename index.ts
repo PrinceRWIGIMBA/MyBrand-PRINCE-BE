@@ -2,11 +2,25 @@ import express, {Application, Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
 import "./config/database";
 
+import multer from 'multer';
+import path from 'path'; // Optional, for file uploads
+
+
 dotenv.config();
 
 const app: Application = express();
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  },
+});
+const upload = multer({ storage: storage });
 
 app.use(express.json());
+
 
 // Routes
 import authRouter from "./routes/auth.route";
@@ -19,7 +33,6 @@ app.use("/api/auth", authRouter);
 app.use("/api/blogs", blogRouter);
 app.use("/api/comments", commentRouter);
 app.use("/api/messages", messageRouter);
-
 
 // 404 error
 app.all("*", (req: Request, res: Response, next: NextFunction) => {
