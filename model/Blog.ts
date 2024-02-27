@@ -1,6 +1,7 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 interface IBlog extends Document {
+  blogId:string,
   title: string;
   description: string;
   contents: string;
@@ -18,6 +19,7 @@ const BlogSchema: Schema = new Schema(
       type: String,
       required: [true, "title is required"],
       trim: true,
+      unique: true,
     },
     description: {
       type: String,

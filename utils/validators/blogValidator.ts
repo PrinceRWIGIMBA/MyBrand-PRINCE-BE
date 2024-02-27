@@ -39,7 +39,7 @@ const createBlogValidator: ValidatorMiddleware = async (req: RequestWithValidati
         'string.max': 'content length must be less than or equal to {#limit} characters long',
       })
   });
-console.log(req.body)
+//console.log(req.body)
   const { error } = schema.validate(req.body, { abortEarly: false });
   if (error) {
     req.validationErrors = error.details.map((err) => err.message);

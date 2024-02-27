@@ -19,9 +19,12 @@ export const requireSignIn = async (req: AuthenticatedRequest, res: Response, ne
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as { id: string };
+   // console.log('Decoded Token:', decoded.id);
 
     if (decoded) {
+      //console.log('Found User:', decoded.id);
       const user = await User.findById(decoded.id);
+     
       if (!user) {
         return res.status(401).json({ error: 'The user belonging to this token no longer exists' });
       }
