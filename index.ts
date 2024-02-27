@@ -5,6 +5,7 @@ import createServer from "./utils/server";
 import multer from 'multer';
 import path from 'path'; // Optional, for file uploads
 
+
 const app =createServer();
 
 dotenv.config();
@@ -45,4 +46,5 @@ const upload = multer({ storage: storage });
 const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
+  
 });
