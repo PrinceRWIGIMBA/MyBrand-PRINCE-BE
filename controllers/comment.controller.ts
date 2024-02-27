@@ -49,6 +49,8 @@ export const createComment = async (req: AuthenticatedRequest, res: Response) =>
   }
 };
 
+
+
 export const updateComment = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -58,7 +60,8 @@ export const updateComment = async (req: Request, res: Response) => {
       return res.status(404).json({ error: `No comment found for id ${id}` });
     }
 
-    res.json({ data: updatedComment });
+    
+    res.status(200).json({ data: updatedComment,});
   } catch (error: any) {
     res.status(500).send({ error: error.message });
   }
@@ -73,7 +76,7 @@ export const getComment = async (req: Request, res: Response) => {
       return res.status(404).json({ error: `No comment found for id ${id}` });
     }
 
-    res.json({ data: comment });
+    res.status(200).json({ data: comment });
   } catch (error: any) {
     res.status(500).send({ error: error.message });
   }
@@ -82,7 +85,7 @@ export const getComment = async (req: Request, res: Response) => {
 export const allComments = async (req: Request, res: Response) => {
   try {
     const comments = await Comment.find();
-    res.json({ data: comments });
+    res.status(200).json({ data: comments });
   } catch (error: any) {
     res.status(500).send({ error: error.message });
   }
