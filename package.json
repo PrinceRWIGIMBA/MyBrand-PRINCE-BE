@@ -21,7 +21,6 @@
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "slugify": "^1.6.5"
-   
   },
   "scripts": {
     "start": "babel-node index.ts",
@@ -52,7 +51,6 @@
     "supertest": "^6.3.4",
     "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
-    "type": "module",
     "typescript": "^5.3.3"
   }
 }
