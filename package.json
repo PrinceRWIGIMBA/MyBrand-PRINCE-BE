@@ -25,7 +25,8 @@
   "scripts": {
     "start": "babel-node index.ts",
     "dev": "nodemon index.ts",
-    "test": "jest --coverage "
+    "test": "jest --coverage ",
+    "build":"tsc"
   },
   "author": "PrinceRWIGMBA",
   "license": "ISC",
