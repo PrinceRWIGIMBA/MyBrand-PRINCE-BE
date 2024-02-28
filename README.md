@@ -1,3 +1,8 @@
+[![Coverage Status](https://coveralls.io/repos/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE/badge.svg?branch=main)](https://coveralls.io/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE?branch=main)
+
+
+
+
 MyBrand-PRINCE-BE APIs
 ======================
 This is the backend project  of project called Mybrand-PRINCE 
