@@ -23,10 +23,10 @@
     "slugify": "^1.6.5"
   },
   "scripts": {
-    "start": "babel-node index.ts",
+    "start": "node index.js",
     "dev": "nodemon index.ts",
     "test": "jest --coverage ",
-    "build":"tsc"
+    "build":"npx tsc"
   },
   "author": "PrinceRWIGMBA",
   "license": "ISC",
