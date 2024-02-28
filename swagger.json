@@ -1,10 +1,16 @@
 {   
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
     "title": "MY BRAND PRINCE BE APIs",
     "description": "This is backend APIs from project collecd my brand prince which consist of 2 part portfolio and admin panel",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "license":{
+      "name":"MIT",
+      "url":"https://opensource.org/lisences/MIT"
+    }
   },
+  "host":"localhost:3000",
+  "basepath":"",
   "tags": [
     {
       "name": "Authentication",
@@ -26,6 +32,10 @@
       "name": "Messages",
       "description": "Operations related to Messages"
     }
+  ],
+  "schemes":[
+    "http",
+    "https"
   ],
   "paths": {
     "/api/auth/signup": {
