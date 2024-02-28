@@ -1,10 +1,11 @@
-import express, {Application, Request, Response, NextFunction } from "express";
+import express, { Application } from "express";
 import dotenv from "dotenv";
 import "./config/database";
 import createServer from "./utils/server";
 import multer from 'multer';
-import path from 'path'; // Optional, for file uploads
-
+import path from 'path'; 
+import swaggerUi from 'swagger-ui-express';
+import * as swaggerDocument from './swagger.json';
 
 const app =createServer();
 
@@ -21,28 +22,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// app.use(express.json());
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
-// Routes
-// import authRouter from "./routes/auth.route";
-// import blogRouter from "./routes/blog.route";
-// import commentRouter from "./routes/comment.route";
-// import messageRouter from "./routes/message.route"
-// import { create } from "domain";
-
-// Routes Middleware
-// app.use("/api/auth", authRouter);
-// app.use("/api/blogs", blogRouter);
-// app.use("/api/comments", commentRouter);
-// app.use("/api/messages", messageRouter);
-
-// // 404 error
-// app.all("*", (req: Request, res: Response, next: NextFunction) => {
-//   res.status(404).json({ message: `This route ${req.originalUrl} doesn't exist`, success: false });
-// });
-
-// // Listen To Server
 const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
