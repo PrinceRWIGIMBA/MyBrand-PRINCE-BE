@@ -47,8 +47,10 @@ export const userPayload = {
 
 
   beforeAll(async () => {
+    
+    //const MONGODB_URL="mongodb+srv://admin:admin123@cluster0.6xvhmbh.mongodb.net/mybland_prince_be";
     //const mongoServer = await MongoMemoryServer.create();
-    await mongoose.connect(process.env.MONGODB_URL as string);
+    await mongoose.connect("mongodb+srv://admin:admin123@cluster0.6xvhmbh.mongodb.net/mybland_prince_be");
 
     const user = await User.create(userPayload);
     //console.log('Created User:', user);
