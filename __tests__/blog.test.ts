@@ -71,7 +71,7 @@ export const blogPayload = {
 
   beforeAll(async () => {
     //const mongoServer = await MongoMemoryServer.create();
-    await mongoose.connect("mongodb+srv://admin:admin123@cluster0.6xvhmbh.mongodb.net/mybland_prince_be");
+    await mongoose.connect(process.env.MONGODB_URL as string);
 
     //const user = await User.create(userPayload);
     //console.log('Created User:', user);
@@ -112,13 +112,11 @@ describe('register user', () => {
   it('should return a 200 and a blog ', async () => {
   const response= await supertest(app).post('/api/auth/signup')
   .send({ 
-
     firstname: "prince2",
     lastname : "rwigimba2",
     email : generateRandomEmail(),
     password : "prince21234" 
-   })
-  
+   })  
   expect(response.statusCode).toBe(200);    
   });
 });
@@ -189,17 +187,29 @@ describe('given the user is  logged in', () => {
         });
       });
 
-      describe(' update  blog', () => {
-        
-  
+      describe('update blog', () => {
         it('should return a 200', async () => {
-        const response= await supertest(app).put(`/api/blogs/${blogId}`)
-        .set('Authorization',token)
-        .send({title:'this blog is updated with this one'})
-        
-        expect(response.statusCode).toBe(200);
+          const response = await supertest(app)
+            .put(`/api/blogs/${blogId}`)
+            .set('Authorization', token)
+            .send({ title: 'this blog is updated with this one' });
+      
+          //console.log('Update Blog Response:', response.body); // Add this for debugging
+      
+          // Add a check for potential token expiration or invalid token
+          if (response.statusCode === 401) {
+            console.error('Unauthorized. Check token validity or expiration.');
+          }
+      
+          // Add a check for potential asynchronous data issues
+          if (response.statusCode !== 200) {
+            console.error('Update Blog failed. Status Code:', response.statusCode);
+          }
+      
+          expect(response.statusCode).toBe(200);
         });
       });
+      
 
 
       // describe('create blog', () => {
