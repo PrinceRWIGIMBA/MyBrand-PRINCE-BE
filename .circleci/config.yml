@@ -38,3 +38,20 @@ workflows:
       - deploy:
           requires:
             - build
+
+deploy:
+  docker:
+    - image: circleci/node:14
+  working_directory: /home/circleci/project
+  steps:
+    - attach_workspace:
+        at: .
+    - run:
+        name: List Files in Workspace
+        command: ls -al
+    - run:
+        name: Install Dependencies
+        command: npm install
+    - run:
+        name: Deploy to Server
+        command: npm run deploy
