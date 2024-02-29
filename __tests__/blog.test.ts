@@ -128,7 +128,7 @@ describe('register user', () => {
   .send({ 
     firstname: "prince2",
     lastname : "rwigimba2",
-    email : generateRandomEmail(),
+    email : "prince1234@getMaxListeners.com",
     password : "prince21234" 
    })  
   expect(response.statusCode).toBe(200);    
