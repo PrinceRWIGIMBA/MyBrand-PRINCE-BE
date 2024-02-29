@@ -95,7 +95,7 @@ export const updateBlog = async (req: AuthenticatedRequest, res: Response) => {
     // Update other fields of the blog if they are present in the request body
     if (req.body.title) {
       blog.title = req.body.title;
-      console.log(req.body.title);
+      //console.log(req.body.title);
 
     }
    

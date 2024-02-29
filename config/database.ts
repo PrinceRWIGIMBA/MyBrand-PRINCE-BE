@@ -13,7 +13,7 @@ const connectOptions: any = {
 };
 
 mongoose
-  .connect(MONGODB_URL, connectOptions)
+  .connect(MONGODB_URL as string  , connectOptions)
   .then(() => {
     console.log("Connected to the database!");
   })

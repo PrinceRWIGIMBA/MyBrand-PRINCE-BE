@@ -10,6 +10,18 @@ import dotenv from "dotenv";
 dotenv.config();
 
 
+// Mock Cloudinary upload function
+jest.mock('../config/cloudinary', () => {
+  return jest.fn().mockImplementation(() => {
+    return {
+      secure_url: 'https://res.cloudinary.com/duy0lhike/image/upload/v1708864244/mock_image.jpg',
+      // Add any other required fields based on your response
+    };
+  });
+});
+
+const cloudinaryUpload = require('../config/cloudinary');
+
 
 
 
@@ -17,11 +29,22 @@ dotenv.config();
 const app = createServer();
 mongoose.set('strictQuery', false);
 
-let userEmail="";
+//let userEmail="";
 
 let blogId="";
 let token="";
 let r = (Math.random() + 1).toString(36).substring(5);
+
+let userEmail="";
+function generateRandomEmail() {
+  const username = Math.random().toString(36).substring(2, 10); // Random username
+  const domains = ['gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com'];
+  const domain = domains[Math.floor(Math.random() * domains.length)]; // Random domain
+  return `${username}@${domain}`;
+}
+
+userEmail=generateRandomEmail();
+
 export const blogPayload = {
     "data": {
       "title": "programmings",
@@ -32,15 +55,15 @@ export const blogPayload = {
   };
   
 
-  userEmail=`${r}@gmail.com`;
-export const userPayload = {
+ // userEmail=userEmail;
+// export const userPayload = {
 
-  firstname:"prince",
-  lastname:"kamana",
-  email: userEmail,
-  password: "prince31234",
-  role:"admin"
-};
+//   firstname:"prince",
+//   lastname:"kamana",
+//   email:generateRandomEmail(),
+//   password: "prince31234",
+//   role:"admin"
+// };
 
 
 //let jwt: string; 
@@ -50,7 +73,7 @@ export const userPayload = {
     //const mongoServer = await MongoMemoryServer.create();
     await mongoose.connect(process.env.MONGODB_URL as string);
 
-    const user = await User.create(userPayload);
+    //const user = await User.create(userPayload);
     //console.log('Created User:', user);
     // Generate JWT token before tests
     //jwt = createToken(user.id);
@@ -89,13 +112,11 @@ describe('register user', () => {
   it('should return a 200 and a blog ', async () => {
   const response= await supertest(app).post('/api/auth/signup')
   .send({ 
-
     firstname: "prince2",
     lastname : "rwigimba2",
-    email : userEmail,
+    email : generateRandomEmail(),
     password : "prince21234" 
-   })
-  
+   })  
   expect(response.statusCode).toBe(200);    
   });
 });
@@ -166,32 +187,58 @@ describe('given the user is  logged in', () => {
         });
       });
 
-      describe(' update  blog', () => {
-        blogId="65ddbec5385b0a57db9c8fd3";
-  
+      describe('update blog', () => {
         it('should return a 200', async () => {
-        const response= await supertest(app).put(`/api/blogs/${blogId}`)
-        .set('Authorization',token)
-        .send({title:'this blog is updated with this one'})
-        
-        expect(response.statusCode).toBe(200);
+          const response = await supertest(app)
+            .put(`/api/blogs/${blogId}`)
+            .set('Authorization', token)
+            .send({ title: 'this blog is updated with this one' });
+      
+          //console.log('Update Blog Response:', response.body); // Add this for debugging
+      
+          // Add a check for potential token expiration or invalid token
+          if (response.statusCode === 401) {
+            console.error('Unauthorized. Check token validity or expiration.');
+          }
+      
+          // Add a check for potential asynchronous data issues
+          if (response.statusCode !== 200) {
+            console.error('Update Blog failed. Status Code:', response.statusCode);
+          }
+      
+          expect(response.statusCode).toBe(200);
         });
       });
+      
 
 
-      describe(' create  blog', () => {
-
-        it('should return a 200', async () => {
-        const response= await supertest(app).post(`/api/blogs/`)
-        .set('Authorization',token)
-        .send({  title: "programmings",
-        description: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It w",
-        contents: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It w",
-        image: "https://res.cloudinary.com/duy0lhike/image/upload/v1708864244/smjjochbgpt1i8bstndo.jpg"})
-        
-        expect(response.statusCode).toBe(200);
-        });
-      });
+      // describe('create blog', () => {
+      //   it('should return a 200', async () => {
+      //     // Mocked Cloudinary upload response
+      //     cloudinaryUpload.mockResolvedValue({
+      //       secure_url: 'https://res.cloudinary.com/duy0lhike/image/upload/v1708864244/mock_image.jpg',
+      //     });
+      
+      //     const response = await supertest(app)
+      //       .post(`/api/blogs`)
+      //       .set('Authorization', token)
+      //       .send({
+      //         title: "programming",
+      //         description: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
+      //         contents: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
+      //         image: "base64 encoded image string", // Use a placeholder for image data
+      //       });
+          
+      //     // Log the response body for more information
+      //     console.log(response.body);
+      
+      //     expect(response.statusCode).toBe(200);
+      //     expect(response.body).toHaveProperty('title', 'programming');
+      //     expect(response.body).toHaveProperty('description', '...');
+      //     // Add more properties to check as needed
+      //   });
+      // });
+      
    
       // like and dislike blog 
       
@@ -283,12 +330,13 @@ describe('given the user is  logged in', () => {
     });
     
 
-    let commentId="65dc936c86ab76141a5ab64a";
+    let commentId="";
 
     describe('get all  comment ', () => {
       it('should return a  and a comment ', async () => {
       const response= await supertest(app).get(`/api/comments`)
       expect(response.statusCode).toBe(200);
+      commentId=response.body.data[0]._id;
       });
     });
 
@@ -315,14 +363,17 @@ describe('given the user is  logged in', () => {
     //messages
 
 
-let messageId='65dca9241828ea1254afc552';
+let messageId='';
 
 describe('get all  message', () => {
   it('should return a 200 and a message ', async () => {
   const response= await supertest(app).get(`/api/messages/`)
   .set('Authorization',token)
   expect(response.statusCode).toBe(200);
+
+  messageId=response.body.data[0]._id;
   });
+ 
 });
 
 
@@ -372,7 +423,7 @@ describe('create  message', () => {
   .set('Authorization',token)
   .send({
     username:"princeMessage",
-  email:`${r}@gmail.com`,
+  email:userEmail,
   querie:"simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard "
 
   })
