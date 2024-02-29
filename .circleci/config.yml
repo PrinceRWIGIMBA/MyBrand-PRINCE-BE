@@ -19,7 +19,7 @@ jobs:
   deploy:
     docker:
       - image: circleci/node:14
-    working_directory: /home/circleci/project  # Ensure this is correct
+    working_directory: /home/circleci/MyBrand-PRINCE-BE # Ensure this is correct
     steps:
       - attach_workspace:
           at: .
