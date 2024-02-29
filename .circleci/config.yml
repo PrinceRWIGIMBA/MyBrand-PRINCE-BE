@@ -1,39 +1,26 @@
+
 version: 2.1
+#orbs
+orbs:
+  node: circleci/node@4.1.0
+  coveralls: coveralls/coveralls@2.2.1
+workflows:
+  build:
+    jobs:
+      - build
 jobs:
   build:
     docker:
-      - image: circleci/node:14
+      - image: cimg/node:16.13.2
     steps:
       - checkout
       - run:
-          name: Install Dependencies
-          command: npm install
-      - run:
-          name: Run Tests
-          command: npm test
-      - persist_to_workspace:
-          root: /home/circleci/project
-          paths:
-            - .env  # Persist .env file for later use
-
-  deploy:
-    docker:
-      - image: circleci/node:14
-    steps:
-      - attach_workspace:
-          at: /home/circleci/project
-      - run:
-          name: Install Dependencies
-          command: npm install
-      - run:
-          name: Deploy to Server
-          command: npm run deploy
-          
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
+          name: Set up Node.js
+          command: |
+            echo "##[group] Installing Node.js"
+            curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            echo "##[endgroup]"
+      - run: npm ci
+      - run: npm test
+      - coveralls/upload
