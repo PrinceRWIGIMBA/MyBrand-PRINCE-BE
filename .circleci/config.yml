@@ -12,17 +12,16 @@ jobs:
           name: Run Tests
           command: npm test
       - persist_to_workspace:
-          root: .
+          root: /home/circleci/project
           paths:
             - .env  # Persist .env file for later use
 
   deploy:
     docker:
       - image: circleci/node:14
-    working_directory: /home/circleci/MyBrand-PRINCE-BE # Ensure this is correct
     steps:
       - attach_workspace:
-          at: .
+          at: /home/circleci/project
       - run:
           name: Install Dependencies
           command: npm install
@@ -38,20 +37,3 @@ workflows:
       - deploy:
           requires:
             - build
-
-deploy:
-  docker:
-    - image: circleci/node:14
-  working_directory: /home/circleci/project
-  steps:
-    - attach_workspace:
-        at: .
-    - run:
-        name: List Files in Workspace
-        command: ls -al
-    - run:
-        name: Install Dependencies
-        command: npm install
-    - run:
-        name: Deploy to Server
-        command: npm run deploy
