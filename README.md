@@ -1,1 +1,1 @@
-[![Coverage Status](https://coveralls.io/repos/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE/badge.svg?branch=main)](https://coveralls.io/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE/badge.svg?branch=fr-be-mybland)](https://coveralls.io/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE?branch=fr-be-mybland)
