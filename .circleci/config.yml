@@ -11,14 +11,10 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
-          name: Load environment variables
-          command: |
-            echo 'export $(cat .env | grep -v ^# | xargs)' >> $BASH_ENV
-            source $BASH_ENV
-      - run:
           name: Run tests
           command: |
-            echo "Running tests with MongoDB URI: $MONGODB_URL"
+            # Use the predefined CircleCI environment variable for MongoDB URI
+            echo "Running tests with MongoDB URI: $MONGODB_URI"
             npm test
       - store_test_results:
           path: test-results
