@@ -78,19 +78,7 @@ export const blogPayload = {
     // Generate JWT token before tests
     //jwt = createToken(user.id);
     //console.log(user._id);
-
-
-  const loginResponse = await supertest(app)
-    .post('/api/auth/login')
-    .send({ email: 'prince2@gmail.com', password: 'prince21234' });
-
-  if (loginResponse.statusCode === 200) {
-    token = `Bearer ${loginResponse.body.token}`;
-    console.log('Token:', token); // Log token for debugging
-  } else {
-    console.error('Login failed:', loginResponse.body);
-  }
-});
+  });
 
 
 
@@ -98,8 +86,6 @@ export const blogPayload = {
     await mongoose.disconnect();
     await mongoose.connection.close();
   });
-
-
 
 
 //Authentication
@@ -128,7 +114,7 @@ describe('register user', () => {
   .send({ 
     firstname: "prince2",
     lastname : "rwigimba2",
-    email : "prince1234@getMaxListeners.com",
+    email : generateRandomEmail(),
     password : "prince21234" 
    })  
   expect(response.statusCode).toBe(200);    
