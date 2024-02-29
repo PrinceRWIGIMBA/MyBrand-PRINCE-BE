@@ -212,32 +212,32 @@ describe('given the user is  logged in', () => {
       
 
 
-      // describe('create blog', () => {
-      //   it('should return a 200', async () => {
-      //     // Mocked Cloudinary upload response
-      //     cloudinaryUpload.mockResolvedValue({
-      //       secure_url: 'https://res.cloudinary.com/duy0lhike/image/upload/v1708864244/mock_image.jpg',
-      //     });
+      describe('create blog', () => {
+        it('should return a 200', async () => {
+          // Mocked Cloudinary upload response
+          cloudinaryUpload.mockResolvedValue({
+            secure_url: 'https://res.cloudinary.com/duy0lhike/image/upload/v1708864244/mock_image.jpg',
+          });
       
-      //     const response = await supertest(app)
-      //       .post(`/api/blogs`)
-      //       .set('Authorization', token)
-      //       .send({
-      //         title: "programming",
-      //         description: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
-      //         contents: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
-      //         image: "base64 encoded image string", // Use a placeholder for image data
-      //       });
+          const response = await supertest(app)
+            .post(`/api/blogs`)
+            .set('Authorization', token)
+            .send({
+              title: "programming",
+              description: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
+              contents: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
+              image: "base64 encoded image string", // Use a placeholder for image data
+            });
           
-      //     // Log the response body for more information
-      //     console.log(response.body);
+          // Log the response body for more information
+          console.log(response.body);
       
-      //     expect(response.statusCode).toBe(200);
-      //     expect(response.body).toHaveProperty('title', 'programming');
-      //     expect(response.body).toHaveProperty('description', '...');
-      //     // Add more properties to check as needed
-      //   });
-      // });
+          expect(response.statusCode).toBe(200);
+          expect(response.body).toHaveProperty('title', 'programming');
+          expect(response.body).toHaveProperty('description', '...');
+          // Add more properties to check as needed
+        });
+      });
       
    
       // like and dislike blog 
