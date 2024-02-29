@@ -49,10 +49,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "firstName": {
+                  "firstname": {
                     "type": "string"
                   },
-                  "lastName": {
+                  "lastname": {
                     "type": "string"
                   },
                   "email": {
@@ -62,7 +62,7 @@
                     "type": "string"
                   }
                 },
-                "required": ["firstName", "lastName", "email", "password"]
+                "required": ["firstname", "lastname", "email", "password"]
               }
             }
           },
