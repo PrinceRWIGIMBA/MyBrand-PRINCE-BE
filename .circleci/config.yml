@@ -3,22 +3,19 @@ version: 2.1
 workflows:
   build:
     jobs:
-      - build
-
-jobs:
-  build:
-    docker:
-      - image: cimg/node:16.13.2
-    steps:
-      - checkout
-      - run:
-          name: Set up Node.js
-          command: |
-            echo "##[group] Installing Node.js"
-            curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-            echo "##[endgroup]"
-      - run: npm ci
-      - run: npm test
-    post_steps:
-      - coveralls/upload
+      - my_job_name:  # Replace with a descriptive name for your job
+          docker:
+            - image: cimg/node:16.13.2
+          steps:
+            - checkout
+            - run:
+                name: Set up Node.js
+                command: |
+                  echo "##[group] Installing Node.js"
+                  curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+                  sudo apt-get install -y nodejs
+                  echo "##[endgroup]"
+            - run: npm ci
+            - run: npm test
+          post_steps:  # Added the post_steps section under the specific job
+            - coveralls/upload
