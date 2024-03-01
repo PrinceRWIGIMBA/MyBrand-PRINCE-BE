@@ -9,7 +9,7 @@
       "url":"https://opensource.org/lisences/MIT"
     }
   },
-  "host": "https://mybrand-prince-be.onrender.com",
+  "host": "mybrand-prince-be.onrender.com", // http://localhost:300
   "basepath":"",
   "tags": [
     {
