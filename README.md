@@ -1,4 +1,4 @@
- [![CircleCI](https://dl.circleci.com/status-badge/img/gh/PrinceRWIGIMBA/MyBrand-PRINCE-BE/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/PrinceRWIGIMBA/MyBrand-PRINCE-BE/tree/main) [![Coverage Status](https://coveralls.io/repos/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE/badge.svg?branch=fr-be-mybland)](https://coveralls.io/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE?branch=fr-be-mybland)
+ [![CircleCI](https://dl.circleci.com/status-badge/img/gh/PrinceRWIGIMBA/MyBrand-PRINCE-BE/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/PrinceRWIGIMBA/MyBrand-PRINCE-BE/tree/fr-be-mybland) [![Coverage Status](https://coveralls.io/repos/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE/badge.svg?branch=fr-be-mybland)](https://coveralls.io/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE?branch=fr-be-mybland)
 
 
 
