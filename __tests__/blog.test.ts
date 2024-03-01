@@ -264,7 +264,7 @@ describe('given the user is  logged in', () => {
         });
       });
 
-      //if you are unauthenticated to like or dislike  blog
+ 
 
 
       describe('  if you are unauthenticated to like blog', () => {
@@ -284,7 +284,7 @@ describe('given the user is  logged in', () => {
         const response= await supertest(app).post(`/api/blogs/dislike/${blogId}`)
        
       
-        expect(response.statusCode).toBe(401);
+        expect(response.statusCode).toBe(401)
         });
       });
   
