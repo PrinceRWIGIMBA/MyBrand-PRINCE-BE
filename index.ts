@@ -22,6 +22,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
+const host = process.env.API_URL;
+const basePath = ''; // Your desired base path
+swaggerDocument.servers = [{ url: `https://${host}${basePath}` }];
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
