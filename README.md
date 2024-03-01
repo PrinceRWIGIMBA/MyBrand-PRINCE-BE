@@ -1,25 +1,14 @@
 [![Coverage Status](https://coveralls.io/repos/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE/badge.svg?branch=fr-be-mybland)](https://coveralls.io/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE?branch=fr-be-mybland)
 
-<<<<<<< HEAD
-![Static Badge](https://img.shields.io/badge/NODE.JS-%2368A063?style=for-the-badge&logo=node.js&labelColor=black)
-
-![Static Badge](https://img.shields.io/badge/Mongodb-%2368A063?style=for-the-badge&logo=mongodb&labelColor=black)
-
-![Static Badge](https://img.shields.io/badge/TYPESCRIPT-%23007ACC?style=for-the-badge&logo=TYPESCRIPT&labelColor=black)
-=======
-
-
 MyBrand-PRINCE-BE APIs
 This is the backend project of project called Mybrand-PRINCE which is blog project with Portifolio
 
 Technology used
 
-
-
-![Static Badge](https://img.shields.io/badge/NODE.JS-%2368A063?style=for-the-badge&logo=node.js&labelColor=black) ![Static Badge](https://img.shields.io/badge/Mongodb-%2368A063?style=for-the-badge&logo=mongodb&labelColor=black) ![Static Badge](https://img.shields.io/badge/TYPESCRIPT-%23007ACC?style=for-the-badge&logo=TYPESCRIPT&labelColor=black)  *Jwt *Joi
+![Static Badge](https://img.shields.io/badge/NODE.JS-%2368A063?style=for-the-badge&logo=node.js&labelColor=black) ![Static Badge](https://img.shields.io/badge/Mongodb-%2368A063?style=for-the-badge&logo=mongodb&labelColor=black) ![Static Badge](https://img.shields.io/badge/TYPESCRIPT-%23007ACC?style=for-the-badge&logo=TYPESCRIPT&labelColor=black) *Jwt *Joi
 
 Api features
-*Authentication using Json web token(JWT)& Authentication *Blog CRUD operations *Comment CRUD operation *Like and Dislike blog *Message CRUD operation
+*Authentication using Json web token(JWT)& Authentication *Blog CRUD operations *Comment CRUD operation *Like and Dislike blog \*Message CRUD operation
 
 End points
 Authentication
@@ -42,4 +31,3 @@ Likes and Dislikes
 Like(post):http://localhost:3000/api/blogs/like/blogID Dislike(POST):http://localhost:3000/api/blogs/dislike/blogID
 
 Blog .... Create(POST):http://localhost:3000/api/messages/ Read all messages(GET):http://localhost:3000/api/messages/ Read single message(GET):http://localhost:3000/api/messages/ID Read delete message(DELETE):http://localhost:3000/api/messages/ID Read update message(PUT):http://localhost:3000/api/messages/ID
->>>>>>> 4b6a61b21a8e47c662f847eb3c9f6ef17fb1bbd1
