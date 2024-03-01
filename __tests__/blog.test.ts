@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import { createToken } from '../utils/generateToken';
 import createServer from '../utils/server';
 import User from '../model/User';
+import Blog from '../model/Blog';
 
 import dotenv from "dotenv";
 
@@ -126,7 +127,7 @@ describe('register user', () => {
 describe('given the user is  logged in', () => {
   it('should return a 200 and a blog ', async () => {
   const response= await supertest(app).post('/api/auth/login')
-  .send({ email : "prince2@gmail.com",password : "prince21234" })
+  .send({ email : "prince@gmail.com",password : "prince1234" })
   
   expect(response.statusCode).toBe(200);
   expect(response.body).toHaveProperty('token');
@@ -218,16 +219,11 @@ describe('given the user is  logged in', () => {
       //     cloudinaryUpload.mockResolvedValue({
       //       secure_url: 'https://res.cloudinary.com/duy0lhike/image/upload/v1708864244/mock_image.jpg',
       //     });
-      
+      //       const blog1= await Blog.create(blogPayload);
       //     const response = await supertest(app)
       //       .post(`/api/blogs`)
       //       .set('Authorization', token)
-      //       .send({
-      //         title: "programming",
-      //         description: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
-      //         contents: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
-      //         image: "base64 encoded image string", // Use a placeholder for image data
-      //       });
+      //       .send(blog1);
           
       //     // Log the response body for more information
       //     console.log(response.body);
