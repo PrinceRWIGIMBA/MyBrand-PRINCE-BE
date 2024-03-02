@@ -9,9 +9,8 @@ Technology used
 
 
 
-![Static Badge](https://img.shields.io/badge/NODE.JS-%2368A063?style=for-the-badge&logo=node.js&labelColor=black) ![Static Badge](https://img.shields.io/badge/Mongodb-%2368A063?style=for-the-badge&logo=mongodb&labelColor=black) ![Static Badge](https://img.shields.io/badge/joi-red?style=for-the-badge&logo=JOI)
+![Static Badge](https://img.shields.io/badge/NODE.JS-%2368A063?style=for-the-badge&logo=node.js&labelColor=black) ![Static Badge](https://img.shields.io/badge/Mongodb-%2368A063?style=for-the-badge&logo=mongodb&labelColor=black) ![Static Badge](https://img.shields.io/badge/joi-red?style=for-the-badge&logo=JOI) ![Static Badge](https://img.shields.io/badge/jwt-black?style=for-the-badge&logo=jwt)
 
-![Static Badge](https://img.shields.io/badge/joi-black?style=for-the-badge&logo=JOI)
 
 Api features
 *Authentication using Json web token(JWT)& Authentication *Blog CRUD operations *Comment CRUD operation *Like and Dislike blog *Message CRUD operation
