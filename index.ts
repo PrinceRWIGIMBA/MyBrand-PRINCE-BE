@@ -6,11 +6,18 @@ import multer from 'multer';
 import path from 'path'; 
 import swaggerUi from 'swagger-ui-express';
 import * as swaggerDocument from './swagger.json';
-import cors from 'cors';
+import cors from 'cors'
+const app =createServer();
 
-const app = createServer();
+// var corsOptions = {
+//   origin: '*',
+//   optionsSuccessStatus: 200,
+// }
+app.use(cors());
+
 dotenv.config();
 
+// export const app: Application = express();
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads');
@@ -23,16 +30,9 @@ const upload = multer({ storage: storage });
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-// Use Cors middleware
-app.use(cors({
-  origin: '*',
-  optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
-}));
 
 const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
+  
 });
