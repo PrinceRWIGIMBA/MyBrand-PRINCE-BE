@@ -213,28 +213,24 @@ describe('given the user is  logged in', () => {
       
 
 
-      // describe('create blog', () => {
-      //   it('should return a 200', async () => {
-      //     // Mocked Cloudinary upload response
-      //     cloudinaryUpload.mockResolvedValue({
-      //       secure_url: 'https://res.cloudinary.com/duy0lhike/image/upload/v1708864244/mock_image.jpg',
-      //     });
-      //       const blog1= await Blog.create(blogPayload);
-      //     const response = await supertest(app)
-      //       .post(`/api/blogs`)
-      //       .set('Authorization', token)
-      //       .send(blog1);
-          
-      //     // Log the response body for more information
-      //     console.log(response.body);
-      
-      //     expect(response.statusCode).toBe(200);
-      //     expect(response.body).toHaveProperty('title', 'programming');
-      //     expect(response.body).toHaveProperty('description', '...');
-      //     // Add more properties to check as needed
-      //   });
-      // });
-      
+//   describe('delete blog', () => {
+//   it('should return a 204 after deleting the blog', async () => {
+//     const response = await supertest(app)
+//       .delete(`/api/blogs/${blogId}`)
+//       .set('Authorization', token);
+
+//     if (response.statusCode === 401) {
+//       console.error('Unauthorized. Check token validity or expiration.');
+//     }
+
+//     if (response.statusCode !== 204) {
+//       console.error('Delete Blog failed. Status Code:', response.statusCode);
+//     }
+
+//     expect(response.statusCode).toBe(204);
+//   });
+// });
+
    
       // like and dislike blog 
       
