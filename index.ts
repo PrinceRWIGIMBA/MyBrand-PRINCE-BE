@@ -6,26 +6,11 @@ import multer from 'multer';
 import path from 'path'; 
 import swaggerUi from 'swagger-ui-express';
 import * as swaggerDocument from './swagger.json';
-import cors from 'cors'
-const app =createServer();
+import cors from 'cors';
 
-var corsOptions = {
-  origin: '*',
-  optionsSuccessStatus: 200,
-}
-app.use(cors(corsOptions));
-
-// This example allows requests from any origin, you might want to restrict it to your frontend domain
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
-
+const app = createServer();
 dotenv.config();
 
-// export const app: Application = express();
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './uploads');
@@ -38,9 +23,16 @@ const upload = multer({ storage: storage });
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// Use Cors middleware
+app.use(cors({
+  origin: '*',
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 
 const PORT: number = parseInt(process.env.PORT as string, 10) || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
-  
 });
