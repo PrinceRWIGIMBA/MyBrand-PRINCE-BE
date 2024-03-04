@@ -15,6 +15,14 @@ var corsOptions = {
 }
 app.use(cors(corsOptions));
 
+// This example allows requests from any origin, you might want to restrict it to your frontend domain
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
+
 dotenv.config();
 
 // export const app: Application = express();
