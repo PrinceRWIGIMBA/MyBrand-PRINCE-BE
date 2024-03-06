@@ -15,6 +15,19 @@ export const getAllUsers = async (req: Request, res: Response) => {
     res.status(500).send({ error: error.message });
   }
 };
+export const getSingleUser = async (req: Request, res: Response) => {
+  const userId = req.params.id;
+
+  try {
+    const user = await User.findById(userId, '-password'); 
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json({ data: user });
+  } catch (error: any) {
+    res.status(500).send({ error: error.message });
+  }
+};
 
 // Function to log out (assuming you are using token-based authentication)
 export const logout = async (req: Request, res: Response, next: NextFunction) => {
