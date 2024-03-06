@@ -135,6 +135,26 @@ describe('given the user is  logged in', () => {
   });
 });
 
+describe('get all the users', () => {
+  it('should return a 200 and a users ', async () => {
+  const response= await supertest(app).get('/api/auth/Users')
+  .set('Authorization', token)
+  
+  expect(response.statusCode).toBe(200);  
+  });
+});
+
+describe('logout the logged in user', () => {
+  it('should return a 200 ', async () => {
+  const response= await supertest(app).post('/api/auth/logout')
+  .set('Authorization', token)
+  
+  expect(response.statusCode).toBe(200);  
+  });
+});
+
+
+
 
   //blogs
 

@@ -98,6 +98,46 @@
           }
         }
       }
+    }, 
+    "/api/auth/logout": {
+      "post": {
+        "summary": "User Logout",
+        "description": "Log out a user and invalidate token",
+        "tags": ["Authentication"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User logged out successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/api/auth/Users": {
+      "get": {
+        "summary": "Get All Users",
+        "description": "Get a list of all users",
+        "tags": ["Authentication"],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of users retrieved successfully"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
     },
     "/api/blogs": {
       "get": {
