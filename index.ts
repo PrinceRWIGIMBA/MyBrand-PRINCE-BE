@@ -6,8 +6,14 @@ import multer from 'multer';
 import path from 'path'; 
 import swaggerUi from 'swagger-ui-express';
 import * as swaggerDocument from './swagger.json';
-
+import cors from 'cors'
 const app =createServer();
+
+// var corsOptions = {
+//   origin: '*',
+//   optionsSuccessStatus: 200,
+// }
+app.use(cors());
 
 dotenv.config();
 

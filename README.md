@@ -1,19 +1,17 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/PrinceRWIGIMBA/MyBrand-PRINCE-BE/tree/fr-be-mybland.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/PrinceRWIGIMBA/MyBrand-PRINCE-BE/tree/fr-be-mybland) [![Coverage Status](https://coveralls.io/repos/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE/badge.svg?branch=fr-be-mybland)](https://coveralls.io/github/PrinceRWIGIMBA/MyBrand-PRINCE-BE?branch=fr-be-mybland)
 
-
-
 MyBrand-PRINCE-BE APIs
 This is the backend project of project called Mybrand-PRINCE which is blog project with Portifolio
 
 Technology used
 
+![Static Badge](https://img.shields.io/badge/NODE.JS-%2368A063?style=for-the-badge&logo=node.js&labelColor=black) ![Static Badge](https://img.shields.io/badge/Mongodb-%2368A063?style=for-the-badge&logo=mongodb&labelColor=black) ![Static Badge](https://img.shields.io/badge/TYPESCRIPT-%23007ACC?style=for-the-badge&logo=TYPESCRIPT&labelColor=black) *Jwt *Joi
 
 
-![Static Badge](https://img.shields.io/badge/NODE.JS-%2368A063?style=for-the-badge&logo=node.js&labelColor=black) ![Static Badge](https://img.shields.io/badge/Mongodb-%2368A063?style=for-the-badge&logo=mongodb&labelColor=black) ![Static Badge](https://img.shields.io/badge/joi-red?style=for-the-badge&logo=JOI) ![Static Badge](https://img.shields.io/badge/jwt-black?style=for-the-badge&logo=jwt)
 
 
 Api features
-*Authentication using Json web token(JWT)& Authentication *Blog CRUD operations *Comment CRUD operation *Like and Dislike blog *Message CRUD operation
+*Authentication using Json web token(JWT)& Authentication *Blog CRUD operations *Comment CRUD operation *Like and Dislike blog \*Message CRUD operation
 
 End points
 Authentication

@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import { createToken } from '../utils/generateToken';
 import createServer from '../utils/server';
 import User from '../model/User';
+import Blog from '../model/Blog';
 
 import dotenv from "dotenv";
 
@@ -126,13 +127,33 @@ describe('register user', () => {
 describe('given the user is  logged in', () => {
   it('should return a 200 and a blog ', async () => {
   const response= await supertest(app).post('/api/auth/login')
-  .send({ email : "prince2@gmail.com",password : "prince21234" })
+  .send({ email : "prince@gmail.com",password : "Prince@1234" })
   
   expect(response.statusCode).toBe(200);
   expect(response.body).toHaveProperty('token');
     token=`Bearer ${response.body.token}`       
   });
 });
+
+describe('get all the users', () => {
+  it('should return a 200 and a users ', async () => {
+  const response= await supertest(app).get('/api/auth/Users')
+  .set('Authorization', token)
+  
+  expect(response.statusCode).toBe(200);  
+  });
+});
+
+describe('logout the logged in user', () => {
+  it('should return a 200 ', async () => {
+  const response= await supertest(app).post('/api/auth/logout')
+  .set('Authorization', token)
+  
+  expect(response.statusCode).toBe(200);  
+  });
+});
+
+
 
 
   //blogs
@@ -200,8 +221,7 @@ describe('given the user is  logged in', () => {
           if (response.statusCode === 401) {
             console.error('Unauthorized. Check token validity or expiration.');
           }
-      
-          // Add a check for potential asynchronous data issues
+     
           if (response.statusCode !== 200) {
             console.error('Update Blog failed. Status Code:', response.statusCode);
           }
@@ -212,35 +232,7 @@ describe('given the user is  logged in', () => {
       
 
 
-      // describe('create blog', () => {
-      //   it('should return a 200', async () => {
-      //     // Mocked Cloudinary upload response
-      //     cloudinaryUpload.mockResolvedValue({
-      //       secure_url: 'https://res.cloudinary.com/duy0lhike/image/upload/v1708864244/mock_image.jpg',
-      //     });
-      
-      //     const response = await supertest(app)
-      //       .post(`/api/blogs`)
-      //       .set('Authorization', token)
-      //       .send({
-      //         title: "programming",
-      //         description: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
-      //         contents: "nd typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
-      //         image: "base64 encoded image string", // Use a placeholder for image data
-      //       });
-          
-      //     // Log the response body for more information
-      //     console.log(response.body);
-      
-      //     expect(response.statusCode).toBe(200);
-      //     expect(response.body).toHaveProperty('title', 'programming');
-      //     expect(response.body).toHaveProperty('description', '...');
-      //     // Add more properties to check as needed
-      //   });
-      // });
-      
-   
-      // like and dislike blog 
+
       
       describe(' like blog', () => {
         blogId="65db4ae4f4f250eb3ff04609";
@@ -268,7 +260,7 @@ describe('given the user is  logged in', () => {
 
 
       describe('  if you are unauthenticated to like blog', () => {
-        blogId="65db4ae4f4f250eb3ff04609";
+        
       
         it('should return a 401 and  ', async () => {
         const response= await supertest(app).post(`/api/blogs/like/${blogId}`)
@@ -299,7 +291,6 @@ describe('given the user is  logged in', () => {
 
 
     describe('add comment to blog', () => {
-      blogId="65db4ae4f4f250eb3ff04609";
     
       it('should return a 201 and a comment ', async () => {
       const response= await supertest(app).post(`/api/comments/${blogId}`)
