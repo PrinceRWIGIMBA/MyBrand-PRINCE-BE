@@ -334,7 +334,7 @@
                   "email": {
                     "type": "string"
                   },
-                  "content": {
+                  "querie": {
                     "type": "string"
                   }
                 },
