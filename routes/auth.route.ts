@@ -10,6 +10,6 @@ router.post("/signup", signupValidator, signup);
 router.post("/login", loginValidator, login);
 router.post("/logout",requireSignIn, logout);
 router.get("/Users", requireSignIn,allowedTo("admin"), getAllUsers);
-router.get("/Users/:id", requireSignIn, getSingleUser);
+router.get("/Users/:id", getSingleUser);
 
 export default router;
