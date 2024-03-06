@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1709706532314" clover="3.2.0">
-  <project timestamp="1709706532314" name="All files">
-    <metrics statements="326" coveredstatements="221" conditionals="98" coveredconditionals="42" methods="46" coveredmethods="32" elements="470" coveredelements="295" complexity="0" loc="326" ncloc="326" packages="7" files="20" classes="20"/>
+<coverage generated="1709750879765" clover="3.2.0">
+  <project timestamp="1709750879765" name="All files">
+    <metrics statements="335" coveredstatements="222" conditionals="100" coveredconditionals="42" methods="47" coveredmethods="31" elements="482" coveredelements="295" complexity="0" loc="335" ncloc="335" packages="7" files="20" classes="20"/>
     <package name="config">
       <metrics statements="11" coveredstatements="4" conditionals="5" coveredconditionals="0" methods="3" coveredmethods="0"/>
       <file name="multer.ts" path="D:\dev1\prince\andela-dev\my-bland-be-clone2\config\multer.ts">
@@ -20,39 +20,47 @@
       </file>
     </package>
     <package name="controllers">
-      <metrics statements="196" coveredstatements="119" conditionals="58" coveredconditionals="24" methods="25" coveredmethods="19"/>
+      <metrics statements="204" coveredstatements="119" conditionals="60" coveredconditionals="24" methods="26" coveredmethods="18"/>
       <file name="Auth.controller.ts" path="D:\dev1\prince\andela-dev\my-bland-be-clone2\controllers\Auth.controller.ts">
-        <metrics statements="27" coveredstatements="23" conditionals="6" coveredconditionals="5" methods="4" coveredmethods="4"/>
+        <metrics statements="35" coveredstatements="24" conditionals="8" coveredconditionals="5" methods="5" coveredmethods="4"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
         <line num="13" count="1" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="32" count="1" type="stmt"/>
-        <line num="33" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="35" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
         <line num="38" count="1" type="stmt"/>
-        <line num="46" count="1" type="stmt"/>
-        <line num="48" count="1" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="54" count="1" type="stmt"/>
-        <line num="55" count="2" type="stmt"/>
-        <line num="57" count="2" type="stmt"/>
-        <line num="60" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="51" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
         <line num="61" count="1" type="stmt"/>
-        <line num="65" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
-        <line num="73" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
+        <line num="70" count="2" type="stmt"/>
+        <line num="73" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="84" count="1" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
       </file>
       <file name="blog.controller.ts" path="D:\dev1\prince\andela-dev\my-bland-be-clone2\controllers\blog.controller.ts">
-        <metrics statements="91" coveredstatements="47" conditionals="36" coveredconditionals="14" methods="10" coveredmethods="7"/>
+        <metrics statements="91" coveredstatements="46" conditionals="36" coveredconditionals="14" methods="10" coveredmethods="6"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
@@ -125,7 +133,7 @@
         <line num="178" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="179" count="0" type="stmt"/>
         <line num="183" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="184" count="2" type="stmt"/>
+        <line num="184" count="0" type="stmt"/>
         <line num="188" count="1" type="stmt"/>
         <line num="189" count="1" type="stmt"/>
         <line num="191" count="1" type="stmt"/>
@@ -287,14 +295,15 @@
       </file>
     </package>
     <package name="routes">
-      <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="31" coveredstatements="31" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="auth.route.ts" path="D:\dev1\prince\andela-dev\my-bland-be-clone2\routes\auth.route.ts">
-        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="6" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
         <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
       </file>
       <file name="blog.route.ts" path="D:\dev1\prince\andela-dev\my-bland-be-clone2\routes\blog.route.ts">
         <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

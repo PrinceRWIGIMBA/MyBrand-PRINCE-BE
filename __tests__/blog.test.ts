@@ -127,7 +127,7 @@ describe('register user', () => {
 describe('given the user is  logged in', () => {
   it('should return a 200 and a blog ', async () => {
   const response= await supertest(app).post('/api/auth/login')
-  .send({ email : "prince@gmail.com",password : "prince1234" })
+  .send({ email : "prince@gmail.com",password : "Prince@1234" })
   
   expect(response.statusCode).toBe(200);
   expect(response.body).toHaveProperty('token');
@@ -221,8 +221,7 @@ describe('logout the logged in user', () => {
           if (response.statusCode === 401) {
             console.error('Unauthorized. Check token validity or expiration.');
           }
-      
-          // Add a check for potential asynchronous data issues
+     
           if (response.statusCode !== 200) {
             console.error('Update Blog failed. Status Code:', response.statusCode);
           }
@@ -233,26 +232,7 @@ describe('logout the logged in user', () => {
       
 
 
-//   describe('delete blog', () => {
-//   it('should return a 204 after deleting the blog', async () => {
-//     const response = await supertest(app)
-//       .delete(`/api/blogs/${blogId}`)
-//       .set('Authorization', token);
 
-//     if (response.statusCode === 401) {
-//       console.error('Unauthorized. Check token validity or expiration.');
-//     }
-
-//     if (response.statusCode !== 204) {
-//       console.error('Delete Blog failed. Status Code:', response.statusCode);
-//     }
-
-//     expect(response.statusCode).toBe(204);
-//   });
-// });
-
-   
-      // like and dislike blog 
       
       describe(' like blog', () => {
         blogId="65db4ae4f4f250eb3ff04609";
@@ -280,7 +260,7 @@ describe('logout the logged in user', () => {
 
 
       describe('  if you are unauthenticated to like blog', () => {
-        blogId="65db4ae4f4f250eb3ff04609";
+        
       
         it('should return a 401 and  ', async () => {
         const response= await supertest(app).post(`/api/blogs/like/${blogId}`)
@@ -311,7 +291,6 @@ describe('logout the logged in user', () => {
 
 
     describe('add comment to blog', () => {
-      blogId="65db4ae4f4f250eb3ff04609";
     
       it('should return a 201 and a comment ', async () => {
       const response= await supertest(app).post(`/api/comments/${blogId}`)
