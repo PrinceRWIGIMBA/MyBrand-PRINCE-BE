@@ -1,4 +1,4 @@
-// blog.route.ts
+
 import { Request, Response } from 'express';
 import { upload } from '../config/multer';
 import cloudinary from '../config/cloudinary';
@@ -8,32 +8,29 @@ import mongoose, { Types } from 'mongoose';
 
 interface AuthenticatedRequest extends Request {
   user: { _id: Types.ObjectId };
-  files: Express.Multer.File[]; // Define files as Express.Multer.File[]
+  files: Express.Multer.File[]; 
 }
 
-// Function to create a new blog
 export const createBlog = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    // Use Multer middleware for file upload
+    
     upload(req, res, async (err: any) => {
       if (err) {
-        // Handle multer errors
+        
         return res.status(400).json({ error: err.message });
       }
 
       try {
-        // Check if req.files exists
+       
         if (!req.files || !req.files.length) {
           return res.status(400).json({ error: 'At least one image file is required' });
         }
 
-        // Upload the first image to Cloudinary
         const cloudinaryResponse = await cloudinary.uploader.upload(req.files[0].path);
         const imageUrl = cloudinaryResponse.secure_url;
         const cloudinary_id = cloudinaryResponse.public_id;
 
-        // Create blog entry with the first image's URL and cloudinary_id
-        const newBlogData = {
+          const newBlogData = {
           ...req.body,
           author: req.user._id,
           image: imageUrl,
@@ -44,7 +41,7 @@ export const createBlog = async (req: AuthenticatedRequest, res: Response) => {
 
         const blog = await Blog.create(newBlogData);
 
-        // Update user's blogs
+    
         await User.findByIdAndUpdate(
           req.user._id,
           { $addToSet: { blogs: blog._id } },
@@ -61,23 +58,22 @@ export const createBlog = async (req: AuthenticatedRequest, res: Response) => {
   }
 };
 
-// Function to update a blog
+
 
 export const updateBlog = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const blogId = req.params.id; // Assuming you are passing the blog ID in the URL params
+    const blogId = req.params.id;
 
-    // Use Multer middleware for file upload
     upload(req, res, async (err: any) => {
       if (err) {
-        // Handle multer errors
+        
         return res.status(400).json({ error: err.message });
       }
 
       try {
         let updateData: any = { ...req.body };
 
-        // Check if req.files exists and update image if a new image is uploaded
+        
         if (req.files && req.files.length > 0) {
           const cloudinaryResponse = await cloudinary.uploader.upload(req.files[0].path);
           const imageUrl = cloudinaryResponse.secure_url;
@@ -86,7 +82,7 @@ export const updateBlog = async (req: AuthenticatedRequest, res: Response) => {
           updateData.cloudinary_id = cloudinary_id;
         }
 
-        // Update the blog entry with new data
+      
         const updatedBlog = await Blog.findByIdAndUpdate(blogId, updateData, { new: true });
 
         if (!updatedBlog) {
