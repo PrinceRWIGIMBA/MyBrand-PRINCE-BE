@@ -62,59 +62,48 @@ export const createBlog = async (req: AuthenticatedRequest, res: Response) => {
 };
 
 // Function to update a blog
+
 export const updateBlog = async (req: AuthenticatedRequest, res: Response) => {
   try {
-    const { id } = req.params;
-    let blog = await Blog.findById(id);
+    const blogId = req.params.id; // Assuming you are passing the blog ID in the URL params
 
-    if (!blog) {
-      return res.status(404).send({ error: `No Blog for this id ${id}` });
-    }
-
-    if (blog.author.toString() !== req.user._id.toString()) {
-      return res.status(403).send({ error: `You are not allowed to update this blog` });
-    }
-
-    // Check if a new image is uploaded
-    if (req.file) {
-      // Upload new image to Cloudinary
-      const cloudinaryResponse = await cloudinary.uploader.upload(req.file.path);
-      const newImageUrl = cloudinaryResponse.secure_url;
-    
-      // Delete old image from Cloudinary if there was one
-      if (blog.cloudinary_id) {
-        
-        await cloudinary.uploader.destroy(blog.cloudinary_id);
+    // Use Multer middleware for file upload
+    upload(req, res, async (err: any) => {
+      if (err) {
+        // Handle multer errors
+        return res.status(400).json({ error: err.message });
       }
 
-      // Update image URL and Cloudinary ID in the blog object
-      blog.image = newImageUrl;
-      blog.cloudinary_id = cloudinaryResponse.public_id;
-    }
+      try {
+        let updateData: any = { ...req.body };
 
-    // Update other fields of the blog if they are present in the request body
-    if (req.body.title) {
-      blog.title = req.body.title;
-      //console.log(req.body.title);
+        // Check if req.files exists and update image if a new image is uploaded
+        if (req.files && req.files.length > 0) {
+          const cloudinaryResponse = await cloudinary.uploader.upload(req.files[0].path);
+          const imageUrl = cloudinaryResponse.secure_url;
+          const cloudinary_id = cloudinaryResponse.public_id;
+          updateData.image = imageUrl;
+          updateData.cloudinary_id = cloudinary_id;
+        }
 
-    }
-   
-    if (req.body.description) {
-      blog.description = req.body.description;
-    }
-    if (req.body.contents) {
-      blog.contents = req.body.contents;
-    }
-    // Add more fields as needed
+        // Update the blog entry with new data
+        const updatedBlog = await Blog.findByIdAndUpdate(blogId, updateData, { new: true });
 
-    // Save the updated blog to the database
-    blog = await blog.save();
+        if (!updatedBlog) {
+          return res.status(404).json({ error: 'Blog not found' });
+        }
 
-    res.status(200).json({ data: blog });
+        res.status(200).send({ data: updatedBlog });
+      } catch (error: any) {
+        res.status(500).send({ error: error.message });
+      }
+    });
   } catch (error: any) {
     res.status(500).send({ error: error.message });
   }
 };
+
+
 
 
 export const allBlogs = async (req: Request, res: Response) => {

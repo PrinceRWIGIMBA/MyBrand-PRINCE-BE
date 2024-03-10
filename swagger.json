@@ -239,7 +239,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "properties": {
@@ -254,14 +254,14 @@
                   },
                   "image": {
                     "type": "string",
-                    "format": "url"
+                    "format": "binary"
                   }
                 },
-                "required": []
+                "required": ["title", "description", "contents", "image"]
               }
             }
           },
-          "required": false
+          "required": true
         },
         "responses": {
           "200": {
